@@ -1,14 +1,14 @@
-const router = require("express")()
+const router = require('express')()
 
-router.post("/factorial", (req, res) => {
+router.post('/factorial', (req, res) => {
   //Factorial logic goes here
 })
 
-router.post("/palindrome", (req, res) => {
+router.post('/palindrome', (req, res) => {
   //Palindrome logic goes here
 })
 
-router.post("/magic", (req, res) => {
+router.post('/magic', (req, res) => {
   //taking the input from the body
   const number = req.body.number
 
