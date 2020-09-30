@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./tests --recursive --timeout 15000 --no-deprecation",
-    "start": "node app.js"
+    "test": "jest --passWithNoTests --noStackTrace --runInBand",
+    "test:integration": "npm test -- --watch -c jest-integration.config.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
