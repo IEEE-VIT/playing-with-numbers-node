@@ -26,7 +26,7 @@ router.post('/palindrome', (req, res) => {
 router.post('/prime/:num', (req, res) => {
     var num=req.params.num;
     res.send(prime(num));
-    //Palindrome logic goes here
+    //Prime logic 
 })
 
 module.exports = router;
