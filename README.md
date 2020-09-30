@@ -14,7 +14,7 @@ Kindly consider leaving a :star: if you like the repository and our organisation
 
 * Clone your forked repo and move inside it:
 
-`git clone https://github.com/IEEE-VIT/playing-with-numbers-node.git && cd playing-with-numbers-node`
+`git clone https://github.com/<your-github-username>/playing-with-numbers-node.git && cd playing-with-numbers-node`
 
 * Checkout to a new branch to work on an issue:
 
