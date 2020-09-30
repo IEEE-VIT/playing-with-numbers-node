@@ -6,7 +6,7 @@ const routes = require('./routes/routes');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(routes);
+app.use('/', routes);
 
 app.get('/', (req, res) => {
     res.send('Backend running successfully');
