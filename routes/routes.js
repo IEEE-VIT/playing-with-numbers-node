@@ -15,17 +15,28 @@ function prime(n){
     }
 }
 
+function factorial(n){
+    if(n==0 || n==1){
+        return 1;
+    }
+    else{
+        return n*factorial(n-1);
+    }
+}
 
-router.post('/factorial', (req, res) => {
+
+router.post('/factorial/:num', (req, res) => {
     //Factorial logic goes here
+    var num=req.params.num;
+    res.send(factorial(num));
 })
 
 router.post('/palindrome', (req, res) => {
     //Palindrome logic goes here
 })
 
-router.post('/prime', (req,res)=> {
-    var num=req.param;
+router.post('/prime/:num', (req,res)=> {
+    var num=req.params.num;
     res.send(prime(num));
 })
 
