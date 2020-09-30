@@ -1,14 +1,14 @@
 const router = require('express')();
 
-router.post('/factorial', (req, res, next) => {
+router.post('/factorial', (req, res) => {
     //Factorial logic goes here
 })
 
-router.post('/palindrome', (req, res, next) => {
+router.post('/palindrome', (req, res) => {
     //Palindrome logic goes here
 })
 
-router.post('/dudeney', (req, res, next) => {
+router.post('/dudeney', (req, res) => {
     //Dudeney Number
     try {
         let number = req.body.number
@@ -20,9 +20,9 @@ router.post('/dudeney', (req, res, next) => {
             number = Math.floor(number / 10);
         }
         if (sumOfDigits == root) {
-            res.send({ message: "The Number is Dudeney Number" }).status(200)
+            res.status(200).send({ message: "The Number is Dudeney Number" })
         } else {
-            res.send({ message: "The Number is Not Dudeney Number" }).status(200)
+            res.status(200).send({ message: "The Number is Not Dudeney Number" })
         }
     } catch (error) {
         res.send({ Error: error }).status(500)
