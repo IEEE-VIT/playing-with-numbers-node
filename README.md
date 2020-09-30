@@ -14,7 +14,7 @@ Kindly consider leaving a :star: if you like the repository and our organisation
 
 * Clone your forked repo and move inside it:
 
-`git clone https://github.com/<your-github-username>/<repo-name>.git && cd <repo-name>`
+`git clone https://github.com/IEEE-VIT/playing-with-numbers-node.git && cd playing-with-numbers-node`
 
 * Checkout to a new branch to work on an issue:
 
@@ -49,8 +49,8 @@ Open your forked repo in your browser and then raise a PR to the `master` branch
 
 
 ## Contributing
-To start contributing, check out [CONTRIBUTING.md](https//url_to_contributing.md_of_the_repo). New contributors are always welcome to support this project. If you want something gentle to start with, check out issues labelled as `easy` or `good-first-issue` Check out issues labelled as `hacktoberfest` if you are up for some grabs! :) 
+To start contributing, check out [CONTRIBUTING.md](https://github.com/IEEE-VIT/playing-with-numbers-node/blob/master/CONTRIBUTING.md). New contributors are always welcome to support this project. If you want something gentle to start with, check out issues labelled as `easy` or `good-first-issue` Check out issues labelled as `hacktoberfest` if you are up for some grabs! :) 
 
 ## License
-This project is licensed under [MIT](https://url_toLICENSE_of_this_repo)
+This project is licensed under [MIT](https://github.com/IEEE-VIT/playing-with-numbers-node/blob/master/LICENSE)
 
