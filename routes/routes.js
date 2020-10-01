@@ -54,6 +54,73 @@ router.post('/prime', (req, res) => {
     }
 });
 
+router.post('/perfect', (req, res) => {
+    var num = parseInt(req.body.number);
+    var sum = 1; 
+  
+    for (var i = 2; i * i <= num; i++) 
+    { 
+        if (num % i==0) 
+        { 
+            if(i * i != num) 
+                sum = sum + i + num / i; 
+            else
+                sum = sum + i; 
+        } 
+    }  
+
+    if (sum == num && num != 1){
+        res.status(200).send("Perfect");
+    }else{
+        res.status(200).send("Not Perfect");
+    } 
+  
+    
+});
+
+
+router.post('/perfect', (req, res) => {
+    var numumber = parseInt(req.body.number);
+  
+
+		flag = number;
+		while(number > 0)
+		{
+			remainder = number%10;
+			addition = addition + remainder*remainder*remainder;
+			number = parseInt(number/10);
+		}
+
+		if(addition == flag)
+		{
+			res.status(200).send("Armstrong");
+		}
+		else
+		{
+			res.status(200).send("Not Armstrong");
+		}
+    
+});
+
+router.post('/prime', (req, res) => {
+    // Prime Number
+    var num = parseInt(req.body.number);
+    let count = 0;
+    for(let i = 2; i < num; i++){
+        if(num % i == 0){
+            count = count+1;
+            break;
+        }
+    }
+    if(count > 0){
+        res.status(200).send("Not Prime");
+    }
+    else{
+        res.status(200).send("Prime");
+    }
+});
+
+
 router.post('/dudeney', (req, res) => {
     //Dudeney Number
     try {
