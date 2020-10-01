@@ -106,5 +106,16 @@ router.post('/disarium', (req, res) => {
     }
 });
 
+router.post('/reverse', (req, res) => {
+    try {
+        const input = req.body.input;
+        const reverse = `${input}`.split('').reverse().join("");
+
+        res.status(200).send({ message: `Input: ${input} | Reversed: ${reverse}` })
+    } catch (error) {
+        res.status(500).send({ Error: error })
+    }
+})
+
 module.exports = router;
 
