@@ -1,3 +1,5 @@
+const { route } = require('../app');
+
 const router = require('express')();
 
 router.post('/factorial', (req, res) => {
@@ -105,6 +107,32 @@ router.post('/disarium', (req, res) => {
         res.status(500).send({ Error: error })
     }
 });
+
+
+//CODE FOR CHECKING AUTOMORPHIC NUMBER
+router.post('/automorphic', (req,res) => {
+    try{
+
+        let number = req.body.number;
+
+        let square = number*number;
+
+        while(number > 0){
+            if(number%10 != square%10){
+                return res.send({message: "The number is not a automorphic number"})
+            }
+
+            number = ~~(number/10);
+            square = ~~(square/10);
+        }
+
+        return res.send({message: "The number is an automorphic number"})
+
+    }
+    catch(err){
+        res.status(500).send({ Error: err })
+    }
+})
 
 module.exports = router;
 
