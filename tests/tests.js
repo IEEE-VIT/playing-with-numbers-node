@@ -23,5 +23,22 @@ describe("Starting tests for app.js ->", () => {
       });
   });
 
+  it("To check if /factorial endpoint is working", (done) => {
+    chai
+      .request(app)
+      .post("/factorial")
+      .type("form")
+      .send({"number": 9})
+      .end((err, res) => {
+        if (err) {
+          done(err);
+          process.exit(1);
+        } else {
+          res.body.should.have.property('result');
+          done();
+        }
+      });
+  });
+
   //Add more tests here
 })
