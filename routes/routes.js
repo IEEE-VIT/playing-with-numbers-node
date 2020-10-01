@@ -12,6 +12,15 @@ router.post('/factorial', (req, res) => {
 	res.status(200).send({ result: fact });
 });
 
+router.post('/odd_or_even', (req, res) => {
+	let number = parseInt(req.body.number);
+	if(number % 2 == 0){
+		res.status(200).send({ message: 'The Number is an even number!' });
+	}else{
+		res.status(200).send({ message: 'The Number is an odd number!' });
+	}
+});
+
 router.post('/palindrome', (req, res) => {
 	//Palindrome logic goes here
 });
