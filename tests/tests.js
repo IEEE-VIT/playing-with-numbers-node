@@ -34,6 +34,7 @@ describe("Starting tests for app.js ->", () => {
           done(err);
           process.exit(1);
         } else {
+          res.should.have.status(200);
           res.body.should.have.property('result');
           done();
         }
