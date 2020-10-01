@@ -16,7 +16,7 @@ router.post('/odd_or_even', (req, res) => {
 	let number = parseInt(req.body.number);
 	if(number % 2 == 0){
 		res.status(200).send({ message: 'The Number is an even number!' });
-	}else{
+	} else {
 		res.status(200).send({ message: 'The Number is an odd number!' });
 	}
 });
