@@ -17,7 +17,7 @@ router.post('/palindrome', (req, res) => {
 });
 
 router.post('/neon', (req, res) => {
-	//Dudeney Number
+	//Neon Number
 	try {
 		const number = req.body.number;
 		let squaredNumber = number * number;
