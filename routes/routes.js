@@ -8,9 +8,9 @@ router.post('/palindrome', (req, res) => {
     //Palindrome logic goes here
 })
 
+
 router.post('/prime', (req, res) => {
     // Prime logic
-
     var num=parseInt(req.body.number);
     let count=0;
     for(let i=2;i<num;i++){
@@ -29,3 +29,5 @@ router.post('/prime', (req, res) => {
 })
 
 module.exports = router;
+module.exports = router;
+
