@@ -22,7 +22,17 @@ router.post('/odd_or_even', (req, res) => {
 });
 
 router.post('/palindrome', (req, res) => {
-	//Palindrome logic goes here
+    //Palindrome logic goes here
+    try {
+        const n = req.body.number;
+        if(String(n) === String(n).split("").reverse().join("")) {
+            res.status(200).send({ message: "The Number is Palindrome"});
+        } else {
+            res.status(200).send({ message: "The Number is not Palindrome"});
+        }
+    } catch (error) {
+        res.status(500).send({ Error: error });
+    }
 });
 
 router.post('/fibonacci', (req, res) => {
