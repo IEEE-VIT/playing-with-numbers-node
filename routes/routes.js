@@ -106,5 +106,32 @@ router.post('/disarium', (req, res) => {
     }
 });
 
+// @Post Method
+// to check Magic Number
+
+router.post('/magic',(req,res)=>{
+    try{
+        let num =parseInt(req.body.number)
+        let sum = 0 
+        while(num > 0 || sum > 9){
+            if (num == 0){
+                num = sum
+                sum = 0
+            }
+            sum += num %10
+            num = Math.floor(num/10)
+        }
+        if (sum == 1){
+            res.status(200).send({message : "The Number is a Magic Number"})
+        }else{
+            res.status(200).send({message: "The number is not a magic number"})
+        }
+
+    }catch(err){
+        console.error(err.messgae)
+        res.status(500).send({ Error: error })
+    }
+})
+
 module.exports = router;
 
