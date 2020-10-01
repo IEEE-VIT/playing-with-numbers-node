@@ -13,7 +13,19 @@ router.post('/factorial', (req, res) => {
 });
 
 router.post('/palindrome', (req, res) => {
-	//Palindrome logic goes here
+	let num = req.body.number;
+	let temp = num;
+	let rev = 0;
+	while(num > 0){
+    		let dig = num % 10;
+   		rev = rev*10 + dig;
+    		num = num/10;
+		if(temp == rev){
+    			res.status(200).send({ message: "This is a Plaindrome" });
+		}else{
+    			res.status(200).send({ message: "This is not a Plaindrome" });
+		}
+	}
 });
 
 router.post('/neon', (req, res) => {
