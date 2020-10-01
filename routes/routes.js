@@ -19,18 +19,18 @@ router.post('/palindrome', (req, res) => {
 router.post('/neon', (req, res) => {
 	//Neon Number
 	try {
-      const number = req.body.number;
-      let squaredNumber = number * number;
-      let sumOfDigits = 0;
-      while (squaredNumber) {
-          sumOfDigits += squaredNumber % 10;
-          squaredNumber = Math.floor(squaredNumber / 10);
-      }
-      if (sumOfDigits === number) {
-          res.status(200).send({ message: 'The Number is Neon Number' });
-      } else {
-          res.status(200).send({ message: 'The Number is Not Neon Number' });
-      }
+		const number = req.body.number;
+		let squaredNumber = number * number;
+		let sumOfDigits = 0;
+		while (squaredNumber) {
+			sumOfDigits += squaredNumber % 10;
+			squaredNumber = Math.floor(squaredNumber / 10);
+		}
+		if (sumOfDigits === number) {
+			res.status(200).send({ message: 'The Number is Neon Number' });
+		} else {
+			res.status(200).send({ message: 'The Number is Not Neon Number' });
+		}
 	} catch (error) {
 		res.status(500).send({ Error: error });
 	}
