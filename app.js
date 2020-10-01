@@ -14,4 +14,6 @@ app.get('/', (req, res) => {
 })
 //app is running here
 app.listen(5000, () => console.log('Server running on port 5000'));
+
 module.exports = app;
+
