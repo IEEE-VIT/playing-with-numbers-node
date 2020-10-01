@@ -25,6 +25,20 @@ router.post('/palindrome', (req, res) => {
 	//Palindrome logic goes here
 });
 
+router.post('/fibonacci', (req, res) => {
+    //Fibonacci Series uptill a given number
+    let num = req.body.number;
+    let arr=[];
+    arr.push(0);
+    arr.push(1);
+    for(let i=2;i<num;i++)
+    {
+        arr.push(arr[i-1]+arr[i-2]);
+    }
+    
+    res.status(200).send(arr);
+});
+
 router.post('/neon', (req, res) => {
 	//Neon Number
 	try {
