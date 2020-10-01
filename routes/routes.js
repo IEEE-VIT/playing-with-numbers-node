@@ -32,7 +32,7 @@ router.post('/neon', (req, res) => {
           res.status(200).send({ message: 'The Number is Not Neon Number' });
       }
 	} catch (error) {
-		  res.send({ Error: error }).status(500);
+		res.status(500).send({ Error: error });
 	}
 });
 
@@ -55,24 +55,55 @@ router.post('/prime', (req, res) => {
 });
 
 router.post('/dudeney', (req, res) => {
-	//Dudeney Number
-	try {
-		let number = req.body.number;
-		let sumOfDigits;
-		const root = Math.cbrt(number);
+    //Dudeney Number
+    try {
+        let number = req.body.number
+        let sumOfDigits
+        const root = Math.cbrt(number)
 
-		while (number) {
-			sumOfDigits += number % 10;
-			number = Math.floor(number / 10);
-		}
-		if (sumOfDigits == root) {
-			res.status(200).send({ message: 'The Number is Dudeney Number' });
-		} else {
-			res.status(200).send({ message: 'The Number is Not Dudeney Number' });
-		}
-	} catch (error) {
-		res.send({ Error: error }).status(500);
-	}
+        while (number) {
+            sumOfDigits += number % 10;
+            number = Math.floor(number / 10);
+        }
+        if (sumOfDigits == root) {
+            res.status(200).send({ message: "The Number is Dudeney Number" })
+        } else {
+            res.status(200).send({ message: "The Number is Not Dudeney Number" })
+        }
+    } catch (error) {
+        res.status(500).send({ Error: error })
+    }
+});
+	
+router.post('/disarium', (req, res) => {
+    //Disarium Number
+    try {
+	let number = req.body.number
+        let noOfDigits = number.toString().length
+
+        let sum = 0; // Initialize sum of terms 
+        let x = number; 
+         let y = noOfDigits 
+        while (y!==0) 
+        { 
+            let r = Math.floor(x%10);
+            // Sum the digits by powering according to 
+            // the positions 
+            sum = (sum + Math.pow(r, noOfDigits));
+            noOfDigits -= 1 
+            x = x/10;
+            y-- 
+        } 
+       
+        // If sum is same as number, then number is a disarium number 
+        if (sum == number) {
+            res.status(200).send({ message: "The Number is a Disarium Number" })
+        } else {
+            res.status(200).send({ message: "The Number is Not a Disarium Number" })
+        }
+    } catch (error) {
+        res.status(500).send({ Error: error })
+    }
 });
 
 module.exports = router;
