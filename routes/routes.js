@@ -14,12 +14,32 @@ router.post('/factorial', (req, res) => {
 
 })
 
-router.post('/palindrome', (req, res) => {
-    //Palindrome logic goes here
-})
+router.post('/palindrome', (req, res, next) => {
+    //Palindrome Number
+    try{
+        var rem, temp, final = 0;
+        var number = parseInt(req.body.number);
+        console.log(req.body);
+    
+        temp = number;
+        while(number>0){
+            rem = number%10;
+            number = parseInt(number/10);
+            final = final*10+rem;
+        }
+
+        if(final==temp){
+            res.status(200).send({ message: `${temp} is a Palindrome Number` });
+        } else{
+            res.status(200).send({ message: `${temp} is not a Palindrome Number` });
+        }
+    } catch(err){
+        res.send({ Error: err }).status(500);
+    }
+});
 
 router.post('/dudeney', (req, res) => {
-    //Dudeney Number
+    //Dudeney Numberor)
     try {
         let number = req.body.number
         let sumOfDigits
