@@ -106,5 +106,17 @@ router.post('/disarium', (req, res) => {
     }
 });
 
+router.post('/reverse_string', (req,res)=>{
+    //Reverse a string
+    let str = req.body.string;
+    function reverseString(s) {
+        if (s == " ")
+        return " ";
+        else
+        return reverseString(s.sustr(1) + s.charAt(0));
+    }
+    res.status(200).send( reverseString(str))
+});
+
 module.exports = router;
 
