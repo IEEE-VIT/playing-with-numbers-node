@@ -14,9 +14,10 @@ router.post('/factorial', (req, res) => {
 
 router.post('/palindrome', (req, res) => {
 	try {
-        const input = req.body.input.toLowerCase();
-        const reverse = `${input}`.split('').reverse().join("");
-        const isPalindrome = input == reverse ? 'Is palindrome' : 'Is not palindrome'
+        const input = req.body.input;
+        const lcInput = `${input}`.toLowerCase()
+        const reverse = `${lcInput}`.split('').reverse().join("");
+        const isPalindrome = lcInput == reverse ? 'Is palindrome' : 'Is not palindrome'
 
         res.status(200).send({ message: isPalindrome })
     } catch (error) {
