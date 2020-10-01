@@ -75,6 +75,25 @@ router.post('/dudeney', (req, res) => {
     }
 });
 	
+router.post('/leap', (req, res) => {
+    //Leap Year
+    try {
+        let year = req.body.number
+        
+        if (year%400 === 0) {
+           res.status(200).send({ message: "The Year is a Leap Year" })
+        }
+	else if (year%100 === 0){
+           res.status(200).send({ message: "The Year is not a Leap Year" })
+        }
+	else if (year%4 === 0){
+           res.status(200).send({ message: "The Year is a Leap Year" })
+        }
+    } catch (error) {
+        res.status(500).send({ Error: error })
+    }
+});
+
 router.post('/disarium', (req, res) => {
     //Disarium Number
     try {
