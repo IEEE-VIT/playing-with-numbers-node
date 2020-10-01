@@ -39,7 +39,7 @@ router.post('/palindrome', (req, res, next) => {
 });
 
 router.post('/dudeney', (req, res) => {
-    //Dudeney Numberor)
+    //Dudeney Number
     try {
         let number = req.body.number
         let sumOfDigits
