@@ -14,12 +14,11 @@ router.post('/factorial', (req, res) => {
 
 })
 
-router.post('/palindrome', (req, res, next) => {
+router.post('/palindrome', (req, res) => {
     //Palindrome Number
     try{
         var rem, temp, final = 0;
         var number = parseInt(req.body.number);
-        console.log(req.body);
     
         temp = number;
         while(number>0){
