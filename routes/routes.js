@@ -32,7 +32,7 @@ router.post('/neon', (req, res) => {
 			res.status(200).send({ message: 'The Number is Not Neon Number' });
 		}
 	} catch (error) {
-		res.send({ Error: error }).status(500);
+		res.status(500).send({ Error: error });
 	}
 });
 
@@ -53,8 +53,9 @@ router.post('/dudeney', (req, res) => {
             res.status(200).send({ message: "The Number is Not Dudeney Number" })
         }
     } catch (error) {
-        res.send({ Error: error }).status(500)
+        res.status(500).send({ Error: error })
     }
+});
 	
 router.post('/disarium', (req, res) => {
     //Disarium Number
@@ -83,8 +84,8 @@ router.post('/disarium', (req, res) => {
             res.status(200).send({ message: "The Number is Not a Disarium Number" })
         }
     } catch (error) {
-        res.send({ Error: error }).status(500)
+        res.status(500).send({ Error: error })
     }
+});
 
-})
 module.exports = router;
