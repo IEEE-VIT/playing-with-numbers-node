@@ -100,7 +100,7 @@ router.post('/dudeney', (req, res) => {
     //Dudeney Number
     try {
         let number = req.body.number
-        let sumOfDigits
+        let sumOfDigits = 0
         const root = Math.cbrt(number)
 
         while (number) {
