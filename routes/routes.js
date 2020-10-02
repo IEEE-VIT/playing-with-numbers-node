@@ -174,5 +174,26 @@ router.post('/tech-number', (req, res) => {
 })
 
 
+router.post('/duck-number', (req, res) => {
+    let num = req.body.number;
+    let flag = false;
+    num = num.toString();
+    let i = 0, n = num.length;
+    while (i < n && num[i] == '0')
+        i++;
+
+    while (i < n) {
+        if (num[i] == '0')
+            flag = true;
+        i++;
+    }
+    if (flag) {
+        res.status(200).send({ message: 'Duck Number' });
+
+    } else {
+        res.status(200).send({ message: 'Not Duck Number' });
+    }
+})
+
 module.exports = router;
 
