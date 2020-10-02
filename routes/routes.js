@@ -194,7 +194,6 @@ router.post('/tech-number', (req, res) => {
     }
 })
 
-
 router.post('/duck-number', (req, res) => {
     let num = req.body.number;
     let flag = false;
@@ -216,5 +215,21 @@ router.post('/duck-number', (req, res) => {
     }
 })
 
-module.exports = router;
+router.post("/leap-year", (req, res) => {
+  let year = req.body.year;
+  let message;
+  
+  if (year % 400 === 0) {
+    message = `The year ${year} is a leap year`;
+  } else if (year % 100 === 0) {
+    message = `The year ${year} is not a leap year`;
+  } else if (year % 4 === 0) {
+    message = `The year ${year} is a leap year`;
+  } else {
+    message = `The year ${year} is not a leap year`;
+  }
 
+  res.status(200).send({ message });
+});
+
+module.exports = router;
