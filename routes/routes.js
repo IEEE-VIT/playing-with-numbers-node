@@ -216,5 +216,42 @@ router.post('/duck-number', (req, res) => {
     }
 })
 
+
+router.post('/armstrong',(req,res)=>{
+    const input = req.body.number;
+    let digits = 0;
+    let digitArr = [];
+    let temp = input;
+    while(temp>0)
+    {
+        digits+=1;
+        digitArr.push(parseInt(temp%10));
+        temp = parseInt(temp/10);
+    }
+    let sum=0;
+    digitArr.forEach((num)=>{
+       sum+=( num**digits );
+    });
+    
+    if(sum==input)
+    {
+        res.status(200).json(
+            {
+                result: "It is an Armstrong number",
+                number: input,
+            }
+        );
+    }
+    else
+    {
+        res.status(200).json(
+            {
+                result: "It is NOT an Armstrong number",
+                number: input,
+            }
+        );
+    }
+})
+
 module.exports = router;
 
