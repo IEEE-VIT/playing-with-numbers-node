@@ -217,7 +217,7 @@ router.post('/duck-number', (req, res) => {
 })
 
 
-router.post('/armstrong-number',(req,res)=>{
+router.post('/armstrong',(req,res)=>{
     const input = req.body.number;
     let digits = 0;
     let digitArr = [];
@@ -251,7 +251,6 @@ router.post('/armstrong-number',(req,res)=>{
             }
         );
     }
-
 })
 
 module.exports = router;
