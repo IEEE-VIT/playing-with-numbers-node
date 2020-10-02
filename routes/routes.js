@@ -146,21 +146,21 @@ router.post('/disarium', (req, res) => {
     }
 });
 
-router.post('/harshad', (req, res)=>{
+router.post('/harshad', (req, res) => {
     //Harshad Number
     try {
         let number = req.body.number
         let sumOfDigits
-        
+
 
         while (number) {
             sumOfDigits += number % 10;
             number = Math.floor(number / 10);
         }
         //if number is divisible by sum of all digits it is harshad number
-        if(number%sumOfDigits ===0){
+        if (number % sumOfDigits === 0) {
             res.status(200).send({ message: "The Number is a Harshad Number" })
-        }else{
+        } else {
             res.status(200).send({ message: "The Number is Not a Harshad Number" })
         }
     } catch (error) {
@@ -215,6 +215,18 @@ router.post('/duck-number', (req, res) => {
         res.status(200).send({ message: 'Not Duck Number' });
     }
 })
+
+router.post('/buzz', (req, res) => {
+    let num = req.body.number;
+
+    if (num % 10 == 7 || num % 7 == 0) {
+        res.status(200).send({ message: 'Buzz Number' });
+    }
+    else {
+        res.status(200).send({ message: 'Not a Buzz Number' });
+    }
+})
+
 
 module.exports = router;
 
