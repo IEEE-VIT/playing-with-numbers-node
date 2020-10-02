@@ -16,11 +16,9 @@ router.post('/palindrome', (req, res) => {
     //Palindrome logic goes here
     try {
         const n = req.body.number;
-        if(String(n) === String(n).split("").reverse().join("")) {
-            res.status(200).send({ message: "The Number is Palindrome"});
-        } else {
-            res.status(200).send({ message: "The Number is not Palindrome"});
-        }
+        const str = String(n) === String(n).split("").reverse().join("") ? "is" : "is not";
+        
+        res.status(200).send({ message: `The Number ${str} Palindrome`});
     } catch (error) {
         res.status(500).send({ Error: error });
     }
