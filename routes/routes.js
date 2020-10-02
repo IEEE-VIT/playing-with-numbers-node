@@ -148,6 +148,28 @@ router.post('/disarium', (req, res) => {
     }
 });
 
+// Check whether a number is  Pronic Number
+
+// Algorithm
+// Check number N is pronic or not.
+// Calculate the square root K of the given number N.
+// Multiply K * (K+1), if result is equal to the number N, then N is a pronic number otherwise not.
+// Pronic Numbers : 0, 2, 6, 12, 20, 30, 42.........
+router.post('/pronic', (req, res) => {
+    try{
+        let number = parseInt(req.body.number);
+        let squareRoot = parseInt(Math.sqrt(number));
+        let pronic = squareRoot * (squareRoot+1);
+
+        if(pronic === number){
+            res.status(200).send({message : "The number is a Pronic number."});
+        } else{
+            res.status(200).send({message : "The number is not a Pronic Number."});
+        }
+    } catch(error){
+        res.status(500).send({Error : error});
+    }
+});
 
 module.exports = router;
 
