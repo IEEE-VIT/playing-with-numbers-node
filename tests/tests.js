@@ -1,4 +1,3 @@
-
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const app = require("../app");
@@ -23,5 +22,25 @@ describe("Starting tests for app.js ->", () => {
       });
   });
 
+  it("To check if /prime endpoint is working", (done) => {
+    chai
+      .request(app)
+      .post("/prime")
+      .type("form")
+      .send({ number: 7 })
+      .end((err, res) => {
+        if (err) {
+          done(err);
+          process.exit(1);
+        } else {
+          res.should.have.status(200);
+          res.text.should.satisfy((str) => {
+            return ["Prime", "Not Prime"].includes(str);
+          });
+          done();
+        }
+      });
+  });
+
   //Add more tests here
-})
+});
