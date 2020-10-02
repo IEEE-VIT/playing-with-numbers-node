@@ -148,6 +148,27 @@ router.post('/disarium', (req, res) => {
     }
 });
 
+router.post('/harshad', (req, res)=>{
+    //Harshad Number
+    try {
+        let number = req.body.number
+        let sumOfDigits
+        
+
+        while (number) {
+            sumOfDigits += number % 10;
+            number = Math.floor(number / 10);
+        }
+        //if number is divisible by sum of all digits it is harshad number
+        if(number%sumOfDigits ===0){
+            res.status(200).send({ message: "The Number is a Harshad Number" })
+        }else{
+            res.status(200).send({ message: "The Number is Not a Harshad Number" })
+        }
+    } catch (error) {
+        res.status(500).send({ Error: error })
+    }
+})
 
 module.exports = router;
 
