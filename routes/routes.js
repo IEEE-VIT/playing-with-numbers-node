@@ -215,6 +215,34 @@ router.post('/duck-number', (req, res) => {
         res.status(200).send({ message: 'Not Duck Number' });
     }
 })
+router.post('/Automorphic-number', (req, res) => {
+    let num = req.body.number;
+    function isAutomorphic(N)
+    {
+      var sq = N * N
+      while (N > 0) {
+         
+        if (N % 10 != sq % 10)
+          return false
+        
+        N = int(N/10)
+        sq = int(sq/10)
+    
+        return true
+          
+        }
+    
+    
+    }
+    isAutomorphic(num)
+    if (isAutomorphic) {
+        res.status(200).send({ message: 'Automorphic number' });
+
+    } else {
+        res.status(200).send({ message: 'Not an Automorphic number' });
+    }
+})
+
 
 module.exports = router;
 
