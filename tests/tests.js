@@ -21,7 +21,9 @@ describe("Starting tests for app.js ->", () => {
         }
       });
   });
+  
   //Add more tests here
+  
   it("Correctly checks if a given year is leap year or not", (done) => {
     const leapYears = [1912, 1928, 1936, 1948, 1980, 2000, 2012];
     const nonLeapYears = [1901, 1913, 1926, 1957, 1962, 1978, 1995];
@@ -47,5 +49,25 @@ describe("Starting tests for app.js ->", () => {
     }
 
     done();
+  });
+
+  it("To check if /prime endpoint is working", (done) => {
+    chai
+      .request(app)
+      .post("/prime")
+      .type("form")
+      .send({ number: 7 })
+      .end((err, res) => {
+        if (err) {
+          done(err);
+          process.exit(1);
+        } else {
+          res.should.have.status(200);
+          res.text.should.satisfy((str) => {
+            return ["Prime", "Not Prime"].includes(str);
+          });
+          done();
+        }
+      });
   });
 });
