@@ -218,15 +218,48 @@ router.post('/duck-number', (req, res) => {
 
 router.post('/buzz', (req, res) => {
     let num = req.body.number;
-
     if (num % 10 == 7 || num % 7 == 0) {
         res.status(200).send({ message: 'Buzz Number' });
-    }
-    else {
+    } else {
         res.status(200).send({ message: 'Not a Buzz Number' });
     }
 })
 
+router.post('/armstrong',(req,res)=>{
+    const input = req.body.number;
+    let digits = 0;
+    let digitArr = [];
+    let temp = input;
+    while(temp>0)
+    {
+        digits+=1;
+        digitArr.push(parseInt(temp%10));
+        temp = parseInt(temp/10);
+    }
+    let sum=0;
+    digitArr.forEach((num)=>{
+       sum+=( num**digits );
+    });
+    
+    if(sum==input)
+    {
+        res.status(200).json(
+            {
+                result: "It is an Armstrong number",
+                number: input,
+            }
+        );
+    }
+    else
+    {
+        res.status(200).json(
+            {
+                result: "It is NOT an Armstrong number",
+                number: input,
+            }
+        );
+    }
+})
 
 module.exports = router;
 
