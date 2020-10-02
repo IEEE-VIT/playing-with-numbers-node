@@ -1,4 +1,13 @@
-const router = require('express')();
+const router = require("express")();
+
+router.post("/reverse", (req, res) => {
+	const originalString = req.body.string;
+	const reverseString = originalString.split("").reverse().join("");
+	res.json({
+		original: originalString,
+		reverse: reverseString,
+	});
+});
 
 router.post('/factorial', (req, res) => {
 	//Factorial logic goes here
@@ -12,8 +21,41 @@ router.post('/factorial', (req, res) => {
 	res.status(200).send({ result: fact });
 });
 
+router.post('/odd_or_even', (req, res) => {
+	let number = parseInt(req.body.number);
+	if(number % 2 == 0){
+		res.status(200).send({ message: 'The Number is an even number!' });
+	} else {
+		res.status(200).send({ message: 'The Number is an odd number!' });
+	}
+});
+
 router.post('/palindrome', (req, res) => {
-	//Palindrome logic goes here
+    //Palindrome logic goes here
+    try {
+        const n = req.body.number;
+        if(String(n) === String(n).split("").reverse().join("")) {
+            res.status(200).send({ message: "The Number is Palindrome"});
+        } else {
+            res.status(200).send({ message: "The Number is not Palindrome"});
+        }
+    } catch (error) {
+        res.status(500).send({ Error: error });
+    }
+});
+
+router.post('/fibonacci', (req, res) => {
+    //Fibonacci Series uptill a given number
+    let num = req.body.number;
+    let arr=[];
+    arr.push(0);
+    arr.push(1);
+    for(let i=2;i<num;i++)
+    {
+        arr.push(arr[i-1]+arr[i-2]);
+    }
+    
+    res.status(200).send(arr);
 });
 
 router.post('/neon', (req, res) => {
@@ -124,4 +166,3 @@ router.post("/leap-year", (req, res) => {
 });
 
 module.exports = router;
-
