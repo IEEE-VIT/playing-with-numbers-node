@@ -227,6 +227,18 @@ router.post('/buzz', (req, res) => {
     }
 })
 
+router.post('/multiply-digits', (req, res) => {
+    let n = req.body.number;
+    let num = n;
+    let result;
+    let mul = 1;
+    while (num > 0) {
+        result = Math.floor(num % 10);
+        mul = mul * result;
+        num = Math.floor(num / 10);
+    }
+    res.status(200).send({ message: `Multiply of digits ${n} = ${mul}` });
+})
 
 module.exports = router;
 
