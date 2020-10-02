@@ -41,6 +41,25 @@ describe("Starting tests for app.js ->", () => {
         }
       });
   });
+  it("To check if /automorphic-number is working", (done) => {
+    chai
+      .request(app)
+      .post("/automorphic-number")
+      .type("form")
+      .send({ number: 5 })
+      .end((err, res) => {
+        if (err) {
+          done(err);
+          process.exit(1);
+        } else {
+          res.should.have.status(200);
+          res.text.should.satisfy((str) => {
+            return ["Automorphic", "Not Automorphic"].includes(str);
+          });
+          done();
+        }
+      });
+  });
 
   //Add more tests here
 });
