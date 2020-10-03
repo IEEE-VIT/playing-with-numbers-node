@@ -264,11 +264,12 @@ router.post('/duck-number', (req, res) => {
 });
 
 router.post('/buzz', (req, res) => {
+    // If a number ends with 7 OR is divisible by 7
     let num = req.body.number;
     if (num % 10 == 7 || num % 7 == 0) {
-        res.status(200).send({ message: 'Buzz Number' });
+        res.status(200).send("Buzz Number");
     } else {
-        res.status(200).send({ message: 'Not a Buzz Number' });
+        res.status(200).send("Not a Buzz Number");
     }
 });
 
