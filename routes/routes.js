@@ -146,13 +146,30 @@ router.post('/disarium', (req, res) => {
     }
 });
 
+router.post("/perfect", (req, res) => {
+    try {
+        let number = req.body.number;
+        let sum = 0;
+        for (let i = 1; i <= number / 2; i++) {
+            if (number % i == 0) {
+                sum += i;
+            }
+        }
+        if (sum == number) {
+            res.status(200).send({ message: "The Number is a Perfect Number" });
+        } else {
+            res.status(200).send({ message: "The Number is Not a Perfect Number" });
+        }
+    } catch (error) {
+        res.status(500).send({ Error: error });
+    }
+});
+
 router.post('/harshad', (req, res) => {
     //Harshad Number
     try {
         let number = req.body.number
-        let sumOfDigits
-
-
+        let sumOfDigits = 0;
         while (number) {
             sumOfDigits += number % 10;
             number = Math.floor(number / 10);
@@ -214,7 +231,7 @@ router.post('/duck-number', (req, res) => {
     } else {
         res.status(200).send({ message: 'Not Duck Number' });
     }
-})
+});
 
 router.post('/buzz', (req, res) => {
     let num = req.body.number;
@@ -223,7 +240,7 @@ router.post('/buzz', (req, res) => {
     } else {
         res.status(200).send({ message: 'Not a Buzz Number' });
     }
-})
+});
 
 router.post('/armstrong',(req,res)=>{
     const input = req.body.number;
@@ -259,7 +276,6 @@ router.post('/armstrong',(req,res)=>{
             }
         );
     }
-})
+});
 
 module.exports = router;
-
