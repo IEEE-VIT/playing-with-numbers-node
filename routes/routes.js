@@ -28,10 +28,11 @@ router.post('/Automorphic_number', (req, res) => {
         let str_num = num.toString();  
         let square = sq_num.toString();  
  
-        if(square.endsWith(str_num))  
+        if(square.endsWith(str_num)){ 
             res.status(200).send({ message: 'The Number is an automorphic number!'});
-        else
+        } else{
             res.status(200).send({ message: 'The Number is not an automorphic number!'});
+        }    
 });
 
 
