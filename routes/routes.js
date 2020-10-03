@@ -175,20 +175,39 @@ router.post('/automorphic', (req,res) => {
         res.status(500).send({ Error: err })
 
 router.post('/harshad', (req, res)=>{
+=======
+router.post("/perfect", (req, res) => {
+    try {
+        let number = req.body.number;
+        let sum = 0;
+        for (let i = 1; i <= number / 2; i++) {
+            if (number % i == 0) {
+                sum += i;
+            }
+        }
+        if (sum == number) {
+            res.status(200).send({ message: "The Number is a Perfect Number" });
+        } else {
+            res.status(200).send({ message: "The Number is Not a Perfect Number" });
+        }
+    } catch (error) {
+        res.status(500).send({ Error: error });
+    }
+});
+
+router.post('/harshad', (req, res) => {
     //Harshad Number
     try {
         let number = req.body.number
-        let sumOfDigits
-        
-
+        let sumOfDigits = 0;
         while (number) {
             sumOfDigits += number % 10;
             number = Math.floor(number / 10);
         }
         //if number is divisible by sum of all digits it is harshad number
-        if(number%sumOfDigits ===0){
+        if (number % sumOfDigits === 0) {
             res.status(200).send({ message: "The Number is a Harshad Number" })
-        }else{
+        } else {
             res.status(200).send({ message: "The Number is Not a Harshad Number" })
         }
     } catch (error) {
@@ -243,7 +262,51 @@ router.post('/duck-number', (req, res) => {
         res.status(200).send({ message: 'Not Duck Number' });
 
     }
-})
+});
+
+router.post('/buzz', (req, res) => {
+    let num = req.body.number;
+    if (num % 10 == 7 || num % 7 == 0) {
+        res.status(200).send({ message: 'Buzz Number' });
+    } else {
+        res.status(200).send({ message: 'Not a Buzz Number' });
+    }
+});
+
+router.post('/armstrong',(req,res)=>{
+    const input = req.body.number;
+    let digits = 0;
+    let digitArr = [];
+    let temp = input;
+    while(temp>0)
+    {
+        digits+=1;
+        digitArr.push(parseInt(temp%10));
+        temp = parseInt(temp/10);
+    }
+    let sum=0;
+    digitArr.forEach((num)=>{
+       sum+=( num**digits );
+    });
+    
+    if(sum==input)
+    {
+        res.status(200).json(
+            {
+                result: "It is an Armstrong number",
+                number: input,
+            }
+        );
+    }
+    else
+    {
+        res.status(200).json(
+            {
+                result: "It is NOT an Armstrong number",
+                number: input,
+            }
+        );
+    }
+});
 
 module.exports = router;
-
