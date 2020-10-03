@@ -95,6 +95,42 @@ router.post('/prime', (req, res) => {
     }
 });
 
+router.post('/amicable', (req, res) => {
+    //Amicable Number
+    try {
+        const { x, y } = req.body
+
+        let s = 0, i, amicable = false;
+
+        for (i = 1; i < x; i++) {
+            if (x % i == 0) {
+                s = s + i;
+            }
+        }
+        if (s == y) {
+            s = 0;
+            for (i = 1; i < y; i++) {
+                if (y % i == 0) {
+                    s = s + i;
+                }
+            }
+            if (s == x) {
+                amicable = true
+            }
+        }
+
+        if (amicable) {
+            res.status(200).send({ message: "The Numbers are Amicable" })
+        } else {
+            res.status(200).send({ message: "The Numbers are Not Amicable" })
+        }
+
+    } catch (error) {
+        res.send({ Error: error }).status(500)
+    }
+
+})
+
 router.post('/dudeney', (req, res) => {
     //Dudeney Number
     try {
@@ -264,36 +300,6 @@ router.post('/tech-number', (req, res) => {
         res.status(200).send({ message: 'The Number is not a Tech number!' });
     }
 })
-
-
-router.post('/amicable', (req, res) => {
-    //Amicable logic goes here
-    try {
-
-        const x = req.body.x
-        const y = req.body.y
-        let sumx
-        let sumy
-        for (i = 1; i < x; i++) {
-            if (x % i == 0)
-                sumx += i
-        }
-        for (i = 1; i < y; i++) {
-            if (y % i == 0)
-                sumy += i
-        }
-
-        if (sumx == y && sumy == x) {
-            res.send({ message: "The Number is Amicable Number" }).status(200)
-        } else {
-            res.send({ message: "The Number is Not Amicable Number" }).status(200)
-        }
-
-    } catch (error) {
-        res.send({ Error: error }).status(500)
-    }
-})
-
 
 router.post('/duck-number', (req, res) => {
     let num = req.body.number;
