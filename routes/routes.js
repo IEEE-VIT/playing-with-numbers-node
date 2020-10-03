@@ -105,6 +105,7 @@ router.post('/disarium', (req, res) => {
         res.status(500).send({ Error: error })
     }
 });
+
 router.post("/perfect", (req, res) => {
 	try {
 		let number = req.body.number;
@@ -125,4 +126,3 @@ router.post("/perfect", (req, res) => {
 });
 
 module.exports = router;
-
