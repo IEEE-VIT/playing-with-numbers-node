@@ -185,6 +185,36 @@ router.post('/harshad', (req, res) => {
     }
 })
 
+router.get('/krishnamurthy', (req, res)=>{
+    //A Krishnamurthy number is a number whose sum of the factorial of digits is equal to the number itself
+    try {
+        let number = req.body.number;
+        let sumOfFactorials=0;
+        let temp=number;
+        
+        const factorial=(num)=>{
+            let fact=1;
+            while(num!=0){
+                fact=fact*num;
+                num--;
+            }
+            return fact;
+        }
+
+        while (temp!=0) {
+          sumOfFactorials+=factorial(temp%10);
+          temp=Math.floor(temp/10);
+        }
+        if(sumOfFactorials===parseInt(number)){
+            res.status(200).send({ message: "The Number is a Krishnamurthy Number" });
+        }else{
+            res.status(200).send({ message: "The Number is Not a Krishnamurthy Number" });   
+        }
+    } catch (error) {
+        res.status(500).send({ Error: error })
+    }
+});
+
 router.post('/tech-number', (req, res) => {
     let number = req.body.number;
     let leftSideNumber;
