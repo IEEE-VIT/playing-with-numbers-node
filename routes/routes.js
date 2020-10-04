@@ -1,7 +1,6 @@
 const { route } = require('../app');
 
 const router = require('express')();
-=======
 const router = require("express")();
 
 router.post("/reverse", (req, res) => {
@@ -175,7 +174,30 @@ router.post('/automorphic', (req,res) => {
         res.status(500).send({ Error: err })
 
 router.post('/harshad', (req, res)=>{
-=======
+router.post('/magic',(req,res)=>{
+    try{
+        let num =parseInt(req.body.number)
+        let sum = 0 
+        while(num > 0 || sum > 9){
+            if (num == 0){
+                num = sum
+                sum = 0
+            }
+            sum += num %10
+            num = Math.floor(num/10)
+        }
+        if (sum == 1){
+            res.status(200).send({message : "The Number is a Magic Number"})
+        }else{
+            res.status(200).send({message: "The number is not a magic number"})
+        }
+
+    }catch(err){
+        console.error(err.messgae)
+        res.status(500).send({ Error: error })
+    }
+});
+
 router.post("/perfect", (req, res) => {
     try {
         let number = req.body.number;
@@ -214,6 +236,36 @@ router.post('/harshad', (req, res) => {
         res.status(500).send({ Error: error })
     }
 })
+
+router.get('/krishnamurthy', (req, res)=>{
+    //A Krishnamurthy number is a number whose sum of the factorial of digits is equal to the number itself
+    try {
+        let number = req.body.number;
+        let sumOfFactorials=0;
+        let temp=number;
+        
+        const factorial=(num)=>{
+            let fact=1;
+            while(num!=0){
+                fact=fact*num;
+                num--;
+            }
+            return fact;
+        }
+
+        while (temp!=0) {
+          sumOfFactorials+=factorial(temp%10);
+          temp=Math.floor(temp/10);
+        }
+        if(sumOfFactorials===parseInt(number)){
+            res.status(200).send({ message: "The Number is a Krishnamurthy Number" });
+        }else{
+            res.status(200).send({ message: "The Number is Not a Krishnamurthy Number" });   
+        }
+    } catch (error) {
+        res.status(500).send({ Error: error })
+    }
+});
 
 router.post('/tech-number', (req, res) => {
     let number = req.body.number;
