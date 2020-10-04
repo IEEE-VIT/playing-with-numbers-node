@@ -1,14 +1,19 @@
 {
   "name": "playing-with-numbers-node",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple node.js app that is used to calculate/check some special types of numbers.",
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests --recursive --timeout 15000 --no-deprecation",
     "start": "node app.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "hacktoberfest",
+    "RESTapi",
+    "opensource",
+    "nodejs"
+  ],
+  "author": "IEEE-VIT Student Branch",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
