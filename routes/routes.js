@@ -361,4 +361,17 @@ router.post('/armstrong',(req,res)=>{
     }
 });
 
+router.post('/superd',(req,res)=>{
+    const input=req.body.number;
+    for(let d=2;d<10;d++){
+        let substring=d.toString()*d;
+        let flag=d*Math.pow(input,d);
+        let final=flag.toString();
+        if (final.includes(substring)){
+            res.status(200).send({message:'super-d number'});
+        }
+    }
+    res.status(200).send({message:'super-d number'});
+})
+
 module.exports = router;
