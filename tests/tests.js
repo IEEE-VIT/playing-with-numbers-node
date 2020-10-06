@@ -85,10 +85,7 @@ describe("Starting tests for app.js ->", () => {
         chai
             .request(app)
             .post("/amicable")
-            .send({
-              'x': '220',
-              'y': '284',
-            })
+            .send({ x, y })
             .end((err, res) => {
               if (err) {
                 done(err);
