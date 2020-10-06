@@ -68,5 +68,87 @@ describe("Starting tests for app.js ->", () => {
       });
   });
 
+  it("To check if /triplets endpoint is working; is a right angled triangle",(done)=>{
+    const sides = [3, 4, 5];
+    chai
+      .request(app)
+      .post("/triplets")
+      .type("application/json")
+      .send({sides: sides})
+      .end((err, res) => {
+        if (err) {
+          done(err);
+          process.exit(1);
+        }
+        else {
+          res.should.have.status(200);
+          res.body.should.have.property('result');
+          res.body.should.have.property('result', "Yes. Given sides form a right angled triangle.");
+          done();
+        }
+      });
+  });
+
+  it("To check if /triplets endpoint is working; is not a right angled triangle",(done)=>{
+    const sides = [3, 5, 5];
+    chai
+      .request(app)
+      .post("/triplets")
+      .type("application/json")
+      .send({sides: sides})
+      .end((err, res) => {
+        if (err) {
+          done(err);
+          process.exit(1);
+        }
+        else {
+          res.should.have.status(200);
+          res.body.should.have.property('result');
+          res.body.should.have.property('result', "No. Given sides don't form a right angled triangle.");
+          done();
+        }
+      });
+  });
+
+  it("To check if /triplets endpoint is working; is not a triangle",(done)=>{
+    const sides = [1, 4, 5];
+    chai
+      .request(app)
+      .post("/triplets")
+      .type("application/json")
+      .send({sides: sides})
+      .end((err, res) => {
+        if (err) {
+          done(err);
+          process.exit(1);
+        }
+        else {
+          res.should.have.status(200);
+          res.body.should.have.property('result');
+          res.body.should.have.property('result', "No. Given sides don't form a triangle.");
+          done();
+        }
+      });
+  }); 
+  
+  it("To check if /triplets endpoint is working; bad credentials",(done)=>{
+    const sides = 12;
+    chai
+      .request(app)
+      .post("/triplets")
+      .type("application/json")
+      .send({sides: sides})
+      .end((err, res) => {
+        if (err) {
+          done(err);
+          process.exit(1);
+        }
+        else {
+          res.should.have.status(400);
+          res.body.should.have.property('Error');
+          done();
+        }
+      });
+  }); 
   //Add more tests here
 });

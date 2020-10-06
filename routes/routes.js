@@ -361,4 +361,84 @@ router.post('/armstrong',(req,res)=>{
     }
 });
 
+/*
+bool <= (int[] sides)
+The function takes array of three sides of a triangle
+and returns a JSON output stating if the given sides together
+form a right angled triangle
+eg: 
+body = {
+"sides": [3, 4, 5]
+}
+*/
+router.post('/triplets', (req, res) => {
+    try {
+        let sides = req.body.sides;
+
+        if (sides.length != 3) {
+            return res.status(400).json({
+                "Error": "Input must be an array of integers of length 3 with key named 'sides'."
+            });
+        }
+
+        sides = sides.map(side => parseInt(side));
+
+        gcd = (a, b) => {
+            while(b != 0) {
+                a = a % b;
+                b = a / b;
+            }
+            return a;
+        };
+
+        sides.sort();
+        // Check: If the length of the side is a non-zero positive integer
+        if (sides[0] > 0) {
+            a = sides[0]
+            b = sides[1]
+            c = sides[2]
+
+            // Check: Sum of any two sides of a triangle must be greater than the third side
+            if (a + b > c) {
+                // VALID triangle
+                p1 = a; p2 = c - b;
+                div = gcd(p1, p2);
+                p1 /= div;
+                p2 /= div;
+                
+                q1 = c + b; q2 = b;
+                div = gcd(q1, q2);
+                q1 /= div;
+                q2 /= div;
+
+                if (p1 == q1 && p2 == q2) {
+                    return res.status(200).json({
+                        result: "Yes. Given sides form a right angled triangle.",
+                        sides: sides,
+                    });
+                }
+                else {
+                    return res.status(200).json({
+                        result: "No. Given sides don't form a right angled triangle.",
+                        sides: sides,
+                    });
+                }
+
+            }
+            
+        }
+        return res.status(200).json({
+            result: "No. Given sides don't form a triangle.",
+            sides: sides,
+        });
+    }
+    catch(e) {
+        return res.status(400).json({
+            "Error": "Input must be an array of integers of length 3 with key named 'sides'."
+        });
+    }
+    
+});
+
+
 module.exports = router;
