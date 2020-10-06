@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests --recursive --timeout 15000 --no-deprecation",
-    "start": "node app.js"
+    "start": "node app.js",
+    "lint" : "eslint"
   },
   "keywords": [
     "hacktoberfest",
@@ -22,5 +23,8 @@
     "express": "^4.17.1",
     "mocha": "^8.1.3",
     "should": "^13.2.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.10.0"
   }
 }
