@@ -361,4 +361,34 @@ router.post('/armstrong',(req,res)=>{
     }
 });
 
+router.post("/super-poulet", (req, res) => {
+    let num = req.body.number;
+    let isSuperPoulet = true;
+    let d = [];
+    for (let i = 1; i <= Math.sqrt(num)+1; i++) {
+        if (num % i == 0) {
+            if (num / i == i) 
+            {
+                d.push(i);
+            } else {
+                d.push(i);
+                d.push((num/i).toFixed(0));
+            }
+        }
+    }
+    d = d.sort((a, b) => a - b);
+    for (let i = 0; i < d.length; i++) {
+      let x = (2 ** d[i] - 2) / d[i];
+      if (x.toFixed(0) != x) {
+        isSuperPoulet = false;
+        break;
+      }
+    }
+    res.status(200).send({
+      message: isSuperPoulet
+        ? "It is a super poulet number"
+        : "It is NOT a super poulet number",
+    });
+  });
+
 module.exports = router;
