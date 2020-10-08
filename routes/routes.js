@@ -21,6 +21,21 @@ router.post('/factorial', (req, res) => {
     res.status(200).send({ result: fact });
 });
 
+router.post('/Automorphic_number', (req, res) => {
+        let num = parseInt(req.body.number);
+        let sq_num = num*num;  
+ 
+        let str_num = num.toString();  
+        let square = sq_num.toString();  
+ 
+        if(square.endsWith(str_num)){ 
+            res.status(200).send({ message: 'The Number is an automorphic number!'});
+        } else{
+            res.status(200).send({ message: 'The Number is not an automorphic number!'});
+        }    
+});
+
+
 router.post('/odd_or_even', (req, res) => {
     let number = parseInt(req.body.number);
     if (number % 2 == 0) {
