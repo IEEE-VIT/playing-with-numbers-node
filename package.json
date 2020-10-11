@@ -4,7 +4,7 @@
   "description": "A simple node.js app that is used to calculate/check some special types of numbers.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./tests --recursive --timeout 15000 --no-deprecation",
+    "test": "mocha ./tests --recursive --timeout 15000 --no-deprecation --exit",
     "start": "node app.js"
   },
   "keywords": [
