@@ -391,4 +391,33 @@ router.post('/armstrong',(req,res)=>{
     }
 });
 
+router.post('/super-poulet',(req, req)=>{
+    try{
+    let num = req.body.number;
+    let divarr = [];
+    let x = 0;
+    let sqr = Math.pow(num, 1/2);
+    for(let i = 1; i<=sqr; i++){
+        if(num % i == 0){
+            if(num / i == i){
+                divarr.push(parseInt(i));
+              }
+            else{
+                divarr.push(parseInt(i));
+                divarr.push(parseInt(num/i));
+            }
+        }
+    }
+    for(let i = 1; i<=sqr; i++){
+        x = (2**divarr[i]-2)/divarr[i];
+        if(parseInt(x) != x)
+            res.status(200).send({ message: 'Super-poulet Number' });
+        else
+            res.status(200).send({ message: 'Not Super-poulet Number' });
+    }
+    } catch(error){
+        res.send({ Error: error }).status(500)
+    }
+});
+
 module.exports = router;
