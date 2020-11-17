@@ -9,6 +9,27 @@ router.post("/reverse", (req, res) => {
     });
 });
 
+
+router.post('/pronic_number', (req, res) => {
+    let num = parseInt(req.body.number);
+    let ans = 0;
+        for(let i=0; i < num; i++)
+        {
+            if(i*(i+1) == num)
+            {
+                ans = 1;
+                break;
+            }
+        }
+         
+        if(ans == 1){
+             res.status(200).send({ message: 'The Number is a pronic number!' });
+        } else{
+             res.status(200).send({ message: 'The Number is not a pronic number!' });
+        }
+});
+
+
 router.post('/factorial', (req, res) => {
     //Factorial logic goes here
     let number = parseInt(req.body.number);
