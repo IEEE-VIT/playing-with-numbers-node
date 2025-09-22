@@ -399,6 +399,40 @@ router.post('/buzz', (req, res) => {
     }
 });
 
+router.post('/super-niven-number', (req, res) => {
+    let num = parseInt(req.body.number);
+
+    if (isNaN(num) || num <= 0) {
+        return res.status(200).send({ message: 'Not Super Niven Number' });
+    }
+
+    // Calculate sum of digits
+    let sum = 0, temp = num;
+    while (temp > 0) {
+        sum += temp % 10;
+        temp = Math.floor(temp / 10);
+    }
+
+    // Check if number is Niven
+    if (num % sum !== 0) {
+        return res.status(200).send({ message: 'Not Super Niven Number' });
+    }
+
+    // Check if digit sum is also Niven
+    let digitSum = sum;
+    let sumOfDigitSum = 0, temp2 = digitSum;
+    while (temp2 > 0) {
+        sumOfDigitSum += temp2 % 10;
+        temp2 = Math.floor(temp2 / 10);
+    }
+
+    if (digitSum % sumOfDigitSum === 0) {
+        res.status(200).send({ message: 'Super Niven Number' });
+    } else {
+        res.status(200).send({ message: 'Not Super Niven Number' });
+    }
+});
+
 router.post('/armstrong',(req,res)=>{
     const input = req.body.number;
     let digits = 0;
