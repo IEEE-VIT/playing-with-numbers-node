@@ -59,6 +59,30 @@ router.post('/palindrome', (req, res) => {
     }
 });
 
+router.post('/pronic-number', (req, res) => {
+    let num = parseInt(req.body.number);
+
+    if (isNaN(num) || num < 0) {
+        return res.status(200).send({ message: 'Not Pronic Number' });
+    }
+
+    let isPronic = false;
+
+    for (let i = 0; i <= Math.sqrt(num); i++) {
+        if (i * (i + 1) === num) {
+            isPronic = true;
+            break;
+        }
+    }
+
+    if (isPronic) {
+        res.status(200).send({ message: 'Pronic Number' });
+    } else {
+        res.status(200).send({ message: 'Not Pronic Number' });
+    }
+});
+ 
+
 
 router.post('/leap_year', (req, res) => {
    let year = parseInt(req.body.number);
