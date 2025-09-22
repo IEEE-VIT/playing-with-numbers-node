@@ -59,20 +59,27 @@ router.post('/palindrome', (req, res) => {
     }
 });
 
-
 router.post('/leap_year', (req, res) => {
-   let year = parseInt(req.body.number);
-   function leapyear(year)
-    {
-        let res = (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0);
-        if(res == true){
-            return(res.status(200).send({ message: 'the given year is a leap year' }));
-        } else{
-            return(res.status(200).send({ message: 'the given year is not a leap year' }));
-        }
+  try {
+    const year = parseInt(req.body.number, 10);
+
+    if (isNaN(year)) {
+      return res.status(400).send({ message: 'Please provide a valid year' });
     }
-    leapyear(year);
+
+    const isLeap = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+
+    if (isLeap) {
+      res.status(200).send({ message: 'The given year is a Leap Year' });
+    } else {
+      res.status(200).send({ message: 'The given year is not a Leap Year' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'Internal Server Error' });
+  }
 });
+
 
 router.post('/fibonacci', (req, res) => {
     //Fibonacci Series uptill a given number
@@ -391,4 +398,4 @@ router.post('/armstrong',(req,res)=>{
     }
 });
 
-module.exports = router;
+export default router;
