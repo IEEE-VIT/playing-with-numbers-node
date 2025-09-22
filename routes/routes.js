@@ -78,10 +78,12 @@ router.post('/fibonacci', (req, res) => {
     //Fibonacci Series uptill a given number
     let num = req.body.number;
     let arr = [];
-    arr.push(0);
-    arr.push(1);
-    for (let i = 2; i < num; i++) {
-        arr.push(arr[i - 1] + arr[i - 2]);
+    if(num>=0) arr.push(0);
+    if(num>=1) arr.push(1);
+    let next=arr[0]+arr[1];
+    while(next<=num){
+        arr.push(next);
+        next=arr[arr.length-1]+arr[arr.length-2];
     }
 
     res.status(200).send(arr);
