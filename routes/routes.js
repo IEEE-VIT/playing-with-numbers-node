@@ -61,17 +61,13 @@ router.post('/palindrome', (req, res) => {
 
 
 router.post('/leap_year', (req, res) => {
-   let year = parseInt(req.body.number);
-   function leapyear(year)
-    {
-        let res = (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0);
-        if(res == true){
-            return(res.status(200).send({ message: 'the given year is a leap year' }));
-        } else{
-            return(res.status(200).send({ message: 'the given year is not a leap year' }));
-        }
+    let year = parseInt(req.body.number);
+    let isLeap = (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0);
+    if (isLeap) {
+        res.status(200).send({ message: 'The given year is a leap year' });
+    } else {
+        res.status(200).send({ message: 'The given year is not a leap year' });
     }
-    leapyear(year);
 });
 
 router.post('/fibonacci', (req, res) => {
