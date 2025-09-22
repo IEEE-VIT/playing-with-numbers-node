@@ -464,3 +464,17 @@ app.get('/is-pronic/:number', (req, res) => {
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
+// Verify Express is Properly Improted:
+const express = require('express');
+const app = express();
+app.use(express.json());
+// Check the /leap_year route handler:
+app.post('/leap_year', (req, res) => {
+    const year = req.body.number;
+
+    if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+        return res.status(200).json({ message: "The given year is a leap year" });
+    } else {
+        return res.status(200).json({ message: "The given year is not a leap year" });
+    }
+});
