@@ -45,6 +45,7 @@ router.post('/odd_or_even', (req, res) => {
     }
 });
 
+
 router.post('/palindrome', (req, res) => {
     //Palindrome logic goes here
     try {
@@ -390,5 +391,37 @@ router.post('/armstrong',(req,res)=>{
         );
     }
 });
+
+
+router.post('/amicable', (req, res) => {
+    try {
+        const x = parseInt(req.body.x);
+        const y = parseInt(req.body.y);
+
+        if (isNaN(x) || isNaN(y)) {
+            return res.status(400).send({ message: "Please provide two valid numbers: x and y" });
+        }
+
+        const sumOfDivisors = (num) => {
+            let sum = 0;
+            for (let i = 1; i < num; i++) {
+                if (num % i === 0) sum += i;
+            }
+            return sum;
+        };
+
+        const sumX = sumOfDivisors(x);
+        const sumY = sumOfDivisors(y);
+
+        if (sumX === y && sumY === x) {
+            res.status(200).send({ message: `${x} and ${y} are Amicable Numbers!` });
+        } else {
+            res.status(200).send({ message: `${x} and ${y} are NOT Amicable Numbers!` });
+        }
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+});
+
 
 module.exports = router;
