@@ -47,7 +47,7 @@ describe("Starting tests for app.js ->", () => {
     let fact = 1;
 
     for (let i = 1; i <= number; i++) {
-        fact = fact * i;
+      fact = fact * i;
     }
 
     chai
@@ -61,12 +61,34 @@ describe("Starting tests for app.js ->", () => {
           process.exit(1);
         } else {
           res.should.have.status(200);
-          res.body.should.have.property('result');
-          res.body.should.have.property('result', fact);
+          res.body.should.have.property("result");
+          res.body.should.have.property("result", fact);
           done();
         }
       });
   });
 
-  //Add more tests here
+  // ✅ New test for Fibonacci route
+  it("To check if /fibonacci endpoint is working and returns series up to a number", (done) => {
+    const limit = 20;
+    const expectedSeries = [0, 1, 1, 2, 3, 5, 8, 13];
+
+    chai
+      .request(app)
+      .post("/fibonacci")
+      .type("form")
+      .send({ number: limit })
+      .end((err, res) => {
+        if (err) {
+          done(err);
+          process.exit(1);
+        } else {
+          res.should.have.status(200);
+          res.body.should.have.property("series");
+          res.body.series.should.be.an("array");
+          res.body.series.should.deep.equal(expectedSeries);
+          done();
+        }
+      });
+  });
 });

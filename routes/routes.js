@@ -94,19 +94,32 @@ router.post('/perfect-number', (req, res) => {
     }
 });
 
-
 router.post('/fibonacci', (req, res) => {
-    //Fibonacci Series uptill a given number
-    let num = req.body.number;
-    let arr = [];
-    arr.push(0);
-    arr.push(1);
-    for (let i = 2; i < num; i++) {
-        arr.push(arr[i - 1] + arr[i - 2]);
-    }
+    try {
+        let limit = parseInt(req.body.number);
 
-    res.status(200).send(arr);
+        if (isNaN(limit) || limit < 0) {
+            return res.status(400).send({ error: "Please provide a valid positive number" });
+        }
+
+        let fibSeries = [0, 1];
+        
+        // Generate Fibonacci numbers until the next number exceeds the limit
+        while (true) {
+            let next = fibSeries[fibSeries.length - 1] + fibSeries[fibSeries.length - 2];
+            if (next > limit) break;
+            fibSeries.push(next);
+        }
+
+        res.status(200).send({
+            message: `Fibonacci series up to ${limit}`,
+            series: fibSeries
+        });
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
 });
+
 
 router.post('/neon', (req, res) => {
     //Neon Number
