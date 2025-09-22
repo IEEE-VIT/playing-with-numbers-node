@@ -432,3 +432,35 @@ app.get('/isLeapYear/:year', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+const express = require('express');
+const app = express();
+const port = 3000;
+
+// Function to check if a number is pronic
+function isPronic(number) {
+    for (let i = 0; i * (i + 1) <= number; i++) {
+        if (i * (i + 1) === number) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Route to check for pronic number
+app.get('/is-pronic/:number', (req, res) => {
+    const number = parseInt(req.params.number, 10);
+
+    if (isNaN(number)) {
+        return res.status(400).send({ error: 'Invalid number' });
+    }
+
+    const result = isPronic(number);
+    res.send({
+        number: number,
+        isPronic: result
+    });
+});
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
