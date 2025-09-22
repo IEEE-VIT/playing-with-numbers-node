@@ -413,3 +413,22 @@ function isPerfectNumber(num) {
 // Test the function
 let number = 28; // You can change this number for testing
 console.log(`${number} is ${isPerfectNumber(number) ? "a Perfect Number" : "not a Perfect Number"}`);
+
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/isLeapYear/:year', (req, res) => {
+  const year = parseInt(req.params.year);
+
+  if (isNaN(year)) {
+    return res.status(400).send({ error: 'Invalid year provided' });
+  }
+
+  const isLeap = (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
+  res.send({ year, isLeap });
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
