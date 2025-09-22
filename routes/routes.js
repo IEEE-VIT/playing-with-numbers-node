@@ -398,4 +398,25 @@ router.post('/armstrong',(req,res)=>{
     }
 });
 
+router.post("/perfect", (req, res) => {
+    try {
+        let number = req.body.number;
+        let sum = 0;
+        // Find all proper divisors and sum them up
+        for (let i = 1; i <= number / 2; i++) {
+            if (number % i == 0) {
+                sum += i;
+            }
+        }
+        // Check if the sum of divisors equals the number
+        if (sum == number) {
+            res.status(200).send({ message: "The Number is a Perfect Number" });
+        } else {
+            res.status(200).send({ message: "The Number is Not a Perfect Number" });
+        }
+    } catch (error) {
+        res.status(500).send({ Error: error });
+    }
+});
+
 export default router;
