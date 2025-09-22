@@ -75,6 +75,26 @@ router.post('/leap_year', (req, res) => {
     leapyear(year);
 });
 
+
+router.post('/perfect-number', (req, res) => {
+    let num = parseInt(req.body.number);
+    let sum = 0;
+
+    // find divisors
+    for (let i = 1; i <= Math.floor(num / 2); i++) {
+        if (num % i === 0) {
+            sum += i;
+        }
+    }
+
+    if (sum === num && num !== 0) {
+        res.status(200).send({ message: 'Perfect Number' });
+    } else {
+        res.status(200).send({ message: 'Not Perfect Number' });
+    }
+});
+
+
 router.post('/fibonacci', (req, res) => {
     //Fibonacci Series uptill a given number
     let num = req.body.number;
