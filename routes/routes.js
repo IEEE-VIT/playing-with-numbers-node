@@ -242,7 +242,7 @@ router.post('/harshad', (req, res) => {
 router.get('/krishnamurthy', (req, res)=>{
     //A Krishnamurthy number is a number whose sum of the factorial of digits is equal to the number itself
     try {
-        let number = req.body.number;
+        let number = req.query.number;
         let sumOfFactorials=0;
         let temp=number;
         
