@@ -1,0 +1,1 @@
+yr=int(input("Enter a year to check whether it is a leap year:"))
