@@ -392,3 +392,24 @@ router.post('/armstrong',(req,res)=>{
 });
 
 module.exports = router;
+function isPerfectNumber(num) {
+    if (num <= 1) return false;
+
+    let sum = 1;
+    
+    // Loop to find divisors and sum them
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) {
+            sum += i;
+            if (i !== num / i) {
+                sum += num / i;
+            }
+        }
+    }
+
+    return sum === num;
+}
+
+// Test the function
+let number = 28; // You can change this number for testing
+console.log(`${number} is ${isPerfectNumber(number) ? "a Perfect Number" : "not a Perfect Number"}`);
