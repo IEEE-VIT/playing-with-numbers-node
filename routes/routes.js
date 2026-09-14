@@ -76,16 +76,27 @@ router.post('/leap_year', (req, res) => {
 });
 
 
-router.post('/perfect-number', (req, res) => {
-    let num = parseInt(req.body.number);
-    let sum = 0;
+router.post('/perfect', (req, res) => {
+    try {
+        let number = req.body.number;
+        let sum = 0;
 
-    // find divisors
-    for (let i = 1; i <= Math.floor(num / 2); i++) {
-        if (num % i === 0) {
-            sum += i;
+        for (let i = 1; i <= number / 2; i++) {
+            if (number % i === 0) {
+                sum += i;
+            }
         }
+
+        if (sum === number) {
+            res.status(200).send({ message: 'The given number is a perfect number' });
+        } else {
+            res.status(200).send({ message: 'The given number is not a perfect number' });
+        }
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send({ Error: err.message });
     }
+});
 
     if (sum === num && num !== 0) {
         res.status(200).send({ message: 'Perfect Number' });
