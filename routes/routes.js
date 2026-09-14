@@ -249,7 +249,7 @@ router.post('/magic', (req, res) => {
         }
 
     } catch (err) {
-        console.error(err.messgae)
+        console.error(err.message)
         res.status(500).send({ Error: error })
     }
 });
