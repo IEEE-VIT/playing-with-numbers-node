@@ -22,17 +22,17 @@ router.post('/factorial', (req, res) => {
 });
 
 router.post('/Automorphic_number', (req, res) => {
-        let num = parseInt(req.body.number);
-        let sq_num = num*num;  
- 
-        let str_num = num.toString();  
-        let square = sq_num.toString();  
- 
-        if(square.endsWith(str_num)){ 
-            res.status(200).send({ message: 'The Number is an automorphic number!'});
-        } else{
-            res.status(200).send({ message: 'The Number is not an automorphic number!'});
-        }    
+    let num = parseInt(req.body.number);
+    let sq_num = num * num;
+
+    let str_num = num.toString();
+    let square = sq_num.toString();
+
+    if (square.endsWith(str_num)) {
+        res.status(200).send({ message: 'The Number is an automorphic number!' });
+    } else {
+        res.status(200).send({ message: 'The Number is not an automorphic number!' });
+    }
 });
 
 
@@ -62,49 +62,32 @@ router.post('/palindrome', (req, res) => {
 
 
 router.post('/leap_year', (req, res) => {
-   let year = parseInt(req.body.number);
-   function leapyear(year)
-    {
+    let year = parseInt(req.body.number);
+    function leapyear(year) {
         let res = (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0);
-        if(res == true){
-            return(res.status(200).send({ message: 'the given year is a leap year' }));
-        } else{
-            return(res.status(200).send({ message: 'the given year is not a leap year' }));
+        if (res == true) {
+            return (res.status(200).send({ message: 'the given year is a leap year' }));
+        } else {
+            return (res.status(200).send({ message: 'the given year is not a leap year' }));
         }
     }
     leapyear(year);
 });
 
 
-router.post('/perfect-number', (req, res) => {
-    let num = parseInt(req.body.number);
-    let sum = 0;
 
-    // find divisors
-    for (let i = 1; i <= Math.floor(num / 2); i++) {
-        if (num % i === 0) {
-            sum += i;
-        }
-    }
-
-    if (sum === num && num !== 0) {
-        res.status(200).send({ message: 'Perfect Number' });
-    } else {
-        res.status(200).send({ message: 'Not Perfect Number' });
-    }
-});
 
 
 router.post('/fibonacci', (req, res) => {
     //Fibonacci Series uptill a given number
     let num = req.body.number;
     let arr = [];
-    if(num>=0) arr.push(0);
-    if(num>=1) arr.push(1);
-    let next=arr[0]+arr[1];
-    while(next<=num){
+    if (num >= 0) arr.push(0);
+    if (num >= 1) arr.push(1);
+    let next = arr[0] + arr[1];
+    while (next <= num) {
         arr.push(next);
-        next=arr[arr.length-1]+arr[arr.length-2];
+        next = arr[arr.length - 1] + arr[arr.length - 2];
     }
 
     res.status(200).send(arr);
@@ -199,25 +182,25 @@ router.post('/disarium', (req, res) => {
     }
 });
 
-router.post('/magic',(req,res)=>{
-    try{
-        let num =parseInt(req.body.number)
-        let sum = 0 
-        while(num > 0 || sum > 9){
-            if (num == 0){
+router.post('/magic', (req, res) => {
+    try {
+        let num = parseInt(req.body.number)
+        let sum = 0
+        while (num > 0 || sum > 9) {
+            if (num == 0) {
                 num = sum
                 sum = 0
             }
-            sum += num %10
-            num = Math.floor(num/10)
+            sum += num % 10
+            num = Math.floor(num / 10)
         }
-        if (sum == 1){
-            res.status(200).send({message : "The Number is a Magic Number"})
-        }else{
-            res.status(200).send({message: "The number is not a magic number"})
+        if (sum == 1) {
+            res.status(200).send({ message: "The Number is a Magic Number" })
+        } else {
+            res.status(200).send({ message: "The number is not a magic number" })
         }
 
-    }catch(err){
+    } catch (err) {
         console.error(err.messgae)
         res.status(500).send({ Error: error })
     }
@@ -262,30 +245,30 @@ router.post('/harshad', (req, res) => {
     }
 })
 
-router.get('/krishnamurthy', (req, res)=>{
+router.get('/krishnamurthy', (req, res) => {
     //A Krishnamurthy number is a number whose sum of the factorial of digits is equal to the number itself
     try {
         let number = req.body.number;
-        let sumOfFactorials=0;
-        let temp=number;
-        
-        const factorial=(num)=>{
-            let fact=1;
-            while(num!=0){
-                fact=fact*num;
+        let sumOfFactorials = 0;
+        let temp = number;
+
+        const factorial = (num) => {
+            let fact = 1;
+            while (num != 0) {
+                fact = fact * num;
                 num--;
             }
             return fact;
         }
 
-        while (temp!=0) {
-          sumOfFactorials+=factorial(temp%10);
-          temp=Math.floor(temp/10);
+        while (temp != 0) {
+            sumOfFactorials += factorial(temp % 10);
+            temp = Math.floor(temp / 10);
         }
-        if(sumOfFactorials===parseInt(number)){
+        if (sumOfFactorials === parseInt(number)) {
             res.status(200).send({ message: "The Number is a Krishnamurthy Number" });
-        }else{
-            res.status(200).send({ message: "The Number is Not a Krishnamurthy Number" });   
+        } else {
+            res.status(200).send({ message: "The Number is Not a Krishnamurthy Number" });
         }
     } catch (error) {
         res.status(500).send({ Error: error })
@@ -378,24 +361,22 @@ router.post('/buzz', (req, res) => {
     }
 });
 
-router.post('/armstrong',(req,res)=>{
+router.post('/armstrong', (req, res) => {
     const input = req.body.number;
     let digits = 0;
     let digitArr = [];
     let temp = input;
-    while(temp>0)
-    {
-        digits+=1;
-        digitArr.push(parseInt(temp%10));
-        temp = parseInt(temp/10);
+    while (temp > 0) {
+        digits += 1;
+        digitArr.push(parseInt(temp % 10));
+        temp = parseInt(temp / 10);
     }
-    let sum=0;
-    digitArr.forEach((num)=>{
-       sum+=( num**digits );
+    let sum = 0;
+    digitArr.forEach((num) => {
+        sum += (num ** digits);
     });
-    
-    if(sum==input)
-    {
+
+    if (sum == input) {
         res.status(200).json(
             {
                 result: "It is an Armstrong number",
@@ -403,8 +384,7 @@ router.post('/armstrong',(req,res)=>{
             }
         );
     }
-    else
-    {
+    else {
         res.status(200).json(
             {
                 result: "It is NOT an Armstrong number",
