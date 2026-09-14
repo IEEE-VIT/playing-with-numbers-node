@@ -1,6 +1,19 @@
 const router = require("express")();
 
-router.post("/reverse", (req, res) => {
+function validateNumber(req, res, next) {
+    const number = req.body.number;
+    if (number === undefined || number === null || number === '') {
+        return res.status(400).json({ error: "Please provide a valid number in the request body." });
+    }
+    const parsedNumber = parseInt(number);
+    if (isNaN(parsedNumber)) {
+        return res.status(400).json({ error: "The provided value is not a valid number." });
+    }
+    req.body.number = parsedNumber; // Update the number in the request body to be a valid integer
+    next();
+}
+
+router.post("/reverse", validateNumber, (req, res) => {
     const originalString = req.body.string;
     const reverseString = originalString.split("").reverse().join("");
     res.json({
@@ -9,9 +22,9 @@ router.post("/reverse", (req, res) => {
     });
 });
 
-router.post('/factorial', (req, res) => {
+router.post('/factorial', validateNumber, (req, res) => {
     //Factorial logic goes here
-    let number = parseInt(req.body.number);
+    let number = req.body.number;
     let fact = 1;
 
     for (let i = 1; i <= number; i++) {
@@ -21,8 +34,8 @@ router.post('/factorial', (req, res) => {
     res.status(200).send({ result: fact });
 });
 
-router.post('/Automorphic_number', (req, res) => {
-        let num = parseInt(req.body.number);
+router.post('/Automorphic_number', validateNumber, (req, res) => {
+        let num = req.body.number;
         let sq_num = num*num;  
  
         let str_num = num.toString();  
@@ -36,8 +49,8 @@ router.post('/Automorphic_number', (req, res) => {
 });
 
 
-router.post('/odd_or_even', (req, res) => {
-    let number = parseInt(req.body.number);
+router.post('/odd_or_even', validateNumber, (req, res) => {
+    let number = req.body.number;
     if (number % 2 == 0) {
         res.status(200).send({ message: 'The Number is an even number!' });
     } else {
@@ -46,7 +59,7 @@ router.post('/odd_or_even', (req, res) => {
 });
 
 
-router.post('/palindrome', (req, res) => {
+router.post('/palindrome', validateNumber, (req, res) => {
     //Palindrome logic goes here
     try {
         const n = req.body.number;
@@ -61,8 +74,8 @@ router.post('/palindrome', (req, res) => {
 });
 
 
-router.post('/leap_year', (req, res) => {
-   let year = parseInt(req.body.number);
+router.post('/leap_year', validateNumber, (req, res) => {
+   let year = req.body.number;
    function leapyear(year)
     {
         let res = (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0);
@@ -76,8 +89,8 @@ router.post('/leap_year', (req, res) => {
 });
 
 
-router.post('/perfect-number', (req, res) => {
-    let num = parseInt(req.body.number);
+router.post('/perfect-number', validateNumber, (req, res) => {
+    let num = req.body.number;
     let sum = 0;
 
     // find divisors
@@ -95,7 +108,7 @@ router.post('/perfect-number', (req, res) => {
 });
 
 
-router.post('/fibonacci', (req, res) => {
+router.post('/fibonacci', validateNumber, (req, res) => {
     //Fibonacci Series uptill a given number
     let num = req.body.number;
     let arr = [];
@@ -110,7 +123,7 @@ router.post('/fibonacci', (req, res) => {
     res.status(200).send(arr);
 });
 
-router.post('/neon', (req, res) => {
+router.post('/neon', validateNumber, (req, res) => {
     //Neon Number
     try {
         const number = req.body.number;
@@ -130,9 +143,9 @@ router.post('/neon', (req, res) => {
     }
 });
 
-router.post('/prime', (req, res) => {
+router.post('/prime', validateNumber, (req, res) => {
     // Prime Number
-    var num = parseInt(req.body.number);
+    var num = req.body.number;
     let count = 0;
     for (let i = 2; i < num; i++) {
         if (num % i == 0) {
@@ -148,7 +161,7 @@ router.post('/prime', (req, res) => {
     }
 });
 
-router.post('/dudeney', (req, res) => {
+router.post('/dudeney', validateNumber, (req, res) => {
     //Dudeney Number
     try {
         let number = req.body.number
@@ -169,7 +182,7 @@ router.post('/dudeney', (req, res) => {
     }
 });
 
-router.post('/disarium', (req, res) => {
+router.post('/disarium', validateNumber, (req, res) => {
     //Disarium Number
     try {
         let number = req.body.number
@@ -199,9 +212,9 @@ router.post('/disarium', (req, res) => {
     }
 });
 
-router.post('/magic',(req,res)=>{
+router.post('/magic', validateNumber, (req, res)=>{
     try{
-        let num =parseInt(req.body.number)
+        let num =req.body.number
         let sum = 0 
         while(num > 0 || sum > 9){
             if (num == 0){
@@ -223,7 +236,7 @@ router.post('/magic',(req,res)=>{
     }
 });
 
-router.post("/perfect", (req, res) => {
+router.post("/perfect", validateNumber, (req, res) => {
     try {
         let number = req.body.number;
         let sum = 0;
@@ -242,7 +255,7 @@ router.post("/perfect", (req, res) => {
     }
 });
 
-router.post('/harshad', (req, res) => {
+router.post('/harshad', validateNumber, (req, res) => {
     //Harshad Number
     try {
         let number = req.body.number
@@ -262,7 +275,7 @@ router.post('/harshad', (req, res) => {
     }
 })
 
-router.get('/krishnamurthy', (req, res)=>{
+router.get('/krishnamurthy', validateNumber, (req, res)=>{
     //A Krishnamurthy number is a number whose sum of the factorial of digits is equal to the number itself
     try {
         let number = req.body.number;
@@ -292,7 +305,7 @@ router.get('/krishnamurthy', (req, res)=>{
     }
 });
 
-router.post('/tech-number', (req, res) => {
+router.post('/tech-number', validateNumber, (req, res) => {
     let number = req.body.number;
     let leftSideNumber;
     let rightSideNumber;
@@ -319,7 +332,7 @@ router.post('/tech-number', (req, res) => {
 })
 
 
-router.post('/amicable', (req, res) => {
+router.post('/amicable', validateNumber, (req, res) => {
     //Amicable logic goes here
     try {
 
@@ -348,7 +361,7 @@ router.post('/amicable', (req, res) => {
 })
 
 
-router.post('/duck-number', (req, res) => {
+router.post('/duck-number', validateNumber, (req, res) => {
     let num = req.body.number;
     let flag = false;
     num = num.toString();
@@ -369,7 +382,7 @@ router.post('/duck-number', (req, res) => {
     }
 });
 
-router.post('/buzz', (req, res) => {
+router.post('/buzz', validateNumber, (req, res) => {
     let num = req.body.number;
     if (num % 10 == 7 || num % 7 == 0) {
         res.status(200).send({ message: 'Buzz Number' });
@@ -378,7 +391,7 @@ router.post('/buzz', (req, res) => {
     }
 });
 
-router.post('/armstrong',(req,res)=>{
+router.post('/armstrong', validateNumber, (req, res)=>{
     const input = req.body.number;
     let digits = 0;
     let digitArr = [];
