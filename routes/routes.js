@@ -1,5 +1,31 @@
 const router = require("express")();
 
+function validateNumbers(req, res, fields = ["number"]) {
+    const numbers = {};
+
+    for (const field of fields) {
+        const value = (req.body && req.body[field] !== undefined)
+            ? req.body[field]
+            : req.query && req.query[field];
+        const number = typeof value === "number" || typeof value === "string"
+            ? Number(typeof value === "string" ? value.trim() : value)
+            : NaN;
+
+        if (value === undefined || value === null ||
+            (typeof value === "string" && value.trim() === "") ||
+            !Number.isSafeInteger(number)) {
+            res.status(400).send({
+                message: `Please provide valid integer number${fields.length > 1 ? "s" : ""}: ${fields.join(" and ")}`
+            });
+            return null;
+        }
+
+        numbers[field] = number;
+    }
+
+    return numbers;
+}
+
 router.post("/reverse", (req, res) => {
     const originalString = req.body.string;
     const reverseString = originalString.split("").reverse().join("");
@@ -11,7 +37,9 @@ router.post("/reverse", (req, res) => {
 
 router.post('/factorial', (req, res) => {
     //Factorial logic goes here
-    let number = parseInt(req.body.number);
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
+    let number = numbers.number;
     let fact = 1;
 
     for (let i = 1; i <= number; i++) {
@@ -22,7 +50,9 @@ router.post('/factorial', (req, res) => {
 });
 
 router.post('/Automorphic_number', (req, res) => {
-    let num = parseInt(req.body.number);
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
+    let num = numbers.number;
     let sq_num = num * num;
 
     let str_num = num.toString();
@@ -37,7 +67,9 @@ router.post('/Automorphic_number', (req, res) => {
 
 
 router.post('/odd_or_even', (req, res) => {
-    let number = parseInt(req.body.number);
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
+    let number = numbers.number;
     if (number % 2 == 0) {
         res.status(200).send({ message: 'The Number is an even number!' });
     } else {
@@ -48,8 +80,10 @@ router.post('/odd_or_even', (req, res) => {
 
 router.post('/palindrome', (req, res) => {
     //Palindrome logic goes here
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
     try {
-        const n = req.body.number;
+        const n = numbers.number;
         if (String(n) === String(n).split("").reverse().join("")) {
             res.status(200).send({ message: "The Number is Palindrome" });
         } else {
@@ -62,7 +96,9 @@ router.post('/palindrome', (req, res) => {
 
 
 router.post('/leap_year', (req, res) => {
-    let year = parseInt(req.body.number);
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
+    let year = numbers.number;
     function leapyear(year) {
         let res = (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0);
         if (res == true) {
@@ -80,7 +116,9 @@ router.post('/leap_year', (req, res) => {
 
 router.post('/fibonacci', (req, res) => {
     //Fibonacci Series uptill a given number
-    let num = req.body.number;
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
+    let num = numbers.number;
     let arr = [];
     if (num >= 0) arr.push(0);
     if (num >= 1) arr.push(1);
@@ -95,8 +133,10 @@ router.post('/fibonacci', (req, res) => {
 
 router.post('/neon', (req, res) => {
     //Neon Number
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
     try {
-        const number = req.body.number;
+        const number = numbers.number;
         let squaredNumber = number * number;
         let sumOfDigits = 0;
         while (squaredNumber) {
@@ -115,7 +155,9 @@ router.post('/neon', (req, res) => {
 
 router.post('/prime', (req, res) => {
     // Prime Number
-    var num = parseInt(req.body.number);
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
+    var num = numbers.number;
     let count = 0;
     for (let i = 2; i < num; i++) {
         if (num % i == 0) {
@@ -133,8 +175,10 @@ router.post('/prime', (req, res) => {
 
 router.post('/dudeney', (req, res) => {
     //Dudeney Number
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
     try {
-        let number = req.body.number
+        let number = numbers.number
         let sumOfDigits
         const root = Math.cbrt(number)
 
@@ -154,8 +198,10 @@ router.post('/dudeney', (req, res) => {
 
 router.post('/disarium', (req, res) => {
     //Disarium Number
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
     try {
-        let number = req.body.number
+        let number = numbers.number
         let noOfDigits = number.toString().length
 
         let sum = 0; // Initialize sum of terms 
@@ -183,8 +229,10 @@ router.post('/disarium', (req, res) => {
 });
 
 router.post('/magic', (req, res) => {
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
     try {
-        let num = parseInt(req.body.number)
+        let num = numbers.number
         let sum = 0
         while (num > 0 || sum > 9) {
             if (num == 0) {
@@ -207,8 +255,10 @@ router.post('/magic', (req, res) => {
 });
 
 router.post("/perfect", (req, res) => {
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
     try {
-        let number = req.body.number;
+        let number = numbers.number;
         let sum = 0;
         for (let i = 1; i <= number / 2; i++) {
             if (number % i == 0) {
@@ -227,8 +277,10 @@ router.post("/perfect", (req, res) => {
 
 router.post('/harshad', (req, res) => {
     //Harshad Number
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
     try {
-        let number = req.body.number
+        let number = numbers.number
         let sumOfDigits = 0;
         while (number) {
             sumOfDigits += number % 10;
@@ -247,8 +299,10 @@ router.post('/harshad', (req, res) => {
 
 router.get('/krishnamurthy', (req, res) => {
     //A Krishnamurthy number is a number whose sum of the factorial of digits is equal to the number itself
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
     try {
-        let number = req.body.number;
+        let number = numbers.number;
         let sumOfFactorials = 0;
         let temp = number;
 
@@ -276,7 +330,9 @@ router.get('/krishnamurthy', (req, res) => {
 });
 
 router.post('/tech-number', (req, res) => {
-    let number = req.body.number;
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
+    let number = numbers.number;
     let leftSideNumber;
     let rightSideNumber;
     let num;
@@ -302,7 +358,9 @@ router.post('/tech-number', (req, res) => {
 })
 
 router.post('/duck-number', (req, res) => {
-    let num = req.body.number;
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
+    let num = numbers.number;
     let flag = false;
     num = num.toString();
     let i = 0, n = num.length;
@@ -323,7 +381,9 @@ router.post('/duck-number', (req, res) => {
 });
 
 router.post('/buzz', (req, res) => {
-    let num = req.body.number;
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
+    let num = numbers.number;
     if (num % 10 == 7 || num % 7 == 0) {
         res.status(200).send({ message: 'Buzz Number' });
     } else {
@@ -332,7 +392,9 @@ router.post('/buzz', (req, res) => {
 });
 
 router.post('/armstrong', (req, res) => {
-    const input = req.body.number;
+    const numbers = validateNumbers(req, res);
+    if (!numbers) return;
+    const input = numbers.number;
     let digits = 0;
     let digitArr = [];
     let temp = input;
@@ -366,13 +428,11 @@ router.post('/armstrong', (req, res) => {
 
 
 router.post('/amicable', (req, res) => {
+    const numbers = validateNumbers(req, res, ["x", "y"]);
+    if (!numbers) return;
     try {
-        const x = parseInt(req.body.x);
-        const y = parseInt(req.body.y);
-
-        if (isNaN(x) || isNaN(y)) {
-            return res.status(400).send({ message: "Please provide two valid numbers: x and y" });
-        }
+        const x = numbers.x;
+        const y = numbers.y;
 
         const sumOfDivisors = (num) => {
             let sum = 0;
